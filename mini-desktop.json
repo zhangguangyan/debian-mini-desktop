@@ -1,0 +1,36 @@
+{
+    "builders": [
+        {
+            "type": "virtualbox-iso",
+            "boot_command": [
+                "<esc><wait>",
+                "install",
+                " auto",
+                " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
+                " debian-installer=en_US",
+                " locale=en_US",
+                " keymap=us",
+                " netcfg/get_hostname=dev",
+                " netcfg/get_domain=vm ",
+                "<enter>"
+            ],
+            "boot_wait": "10s",
+            "disk_size": "40000",
+            "guest_os_type": "Debian_64",
+            "headless": "false",
+            "http_directory": "http",
+            "iso_url": "",
+            "vm_name": "mini-desktop-amd64",
+            "ssh_username": "gz",
+            "ssh_password": "pass"
+        }
+
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "scripts": [
+            ]
+        }
+    ]
+}
