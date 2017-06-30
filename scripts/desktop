@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+set -x
+sed -i -e 's/\(^deb cdrom.*$\)/#\1/g' /etc/apt/source.list
+apt update
+apt install -y sudo && usermod -aG sudo gz
+apt install -y apt-transport-https lightdm openbox x11-xserver-utils rxvt-unicode-256color tmux dbus-x11 wmctrl synapse fonts-noto fonts-noto-cjk
+apt install -y build-essential linux-headers-$(uname -r)

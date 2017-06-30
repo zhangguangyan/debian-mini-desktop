@@ -30,6 +30,9 @@
         {
             "type": "shell",
             "scripts": [
+                "scripts/base",
+                "scripts/web",
+                "scripts/dev-tools"
             ]
         }
     ]

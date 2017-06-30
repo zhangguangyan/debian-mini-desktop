@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+set -x
+#---- dev tools
+apt install -y git vim curl openjdk-8-jdk
+
+#--- docker
+wget -qO - https://download.docker.com/linux/debian/gpg | apt-key add -
+echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+apt update && apt install -y docker-ce
+usermod -aG docker gz
+
+#--- node
+version='v6.11.0'
+to=/opt/node
+wget -qO n.tar.xz "https://nodejs.org/dist/${version}/node-${version}-linux-x64.tar.xz"
+[ -d "$to" ] || mkdir "${to}"
+tar xJf n.tar.xz -C "${to}" --strip-components 1
+[ -L /usr/bin/node ] || ln -s "${to}/bin/node" /usr/bin
+[ -L /usr/bin/npm ] || ln -s "${to}/bin/npm" /usr/bin
+
+#--- vs code
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+echo 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main' > /etc/apt/sources.list.d/vscode.list
+apt update && apt install -y code
