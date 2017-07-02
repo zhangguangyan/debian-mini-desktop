@@ -10,7 +10,7 @@ echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -c
 apt update && apt install -y docker-ce
 usermod -aG docker gz
 
-#--- node
+#--- node & yarn
 version='v6.11.0'
 to=/opt/node
 wget -qO n.tar.xz "https://nodejs.org/dist/${version}/node-${version}-linux-x64.tar.xz"
@@ -18,6 +18,8 @@ wget -qO n.tar.xz "https://nodejs.org/dist/${version}/node-${version}-linux-x64.
 tar xJf n.tar.xz -C "${to}" --strip-components 1
 [ -L /usr/bin/node ] || ln -s "${to}/bin/node" /usr/bin
 [ -L /usr/bin/npm ] || ln -s "${to}/bin/npm" /usr/bin
+npm install --global yarn
+[ -L /usr/bin/yarn ] || ln -s "${to}/bin/yarn" /usr/bin
 
 #--- vs code
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
