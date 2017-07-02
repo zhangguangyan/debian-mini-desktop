@@ -10,7 +10,7 @@
                 " debian-installer=en_US",
                 " locale=en_US",
                 " keymap=us",
-                " netcfg/get_hostname=dev",
+                " netcfg/get_hostname=devbox",
                 " netcfg/get_domain=vm ",
                 "<enter>"
             ],
@@ -30,7 +30,8 @@
         {
             "type": "shell",
             "scripts": [
-                "scripts/base",
+                "scripts/desktop",
+                "scripts/virtualbox",
                 "scripts/web",
                 "scripts/dev-tools"
             ]
