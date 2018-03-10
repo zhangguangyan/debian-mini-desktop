@@ -7,5 +7,5 @@ apt install -y sudo && usermod -aG sudo gz
 apt install -y apt-transport-https lightdm openbox x11-xserver-utils rxvt-unicode-256color tmux dbus-x11 wmctrl synapse fonts-noto fonts-noto-cjk
 cat > /home/gz/.config/openbox/autostart << EOF
 #!/bin/dash
-urxvt -e sh -c "wmctrl -r :ACTIVE: -b toggle,fullscreen; tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -s$USER@$HOSTNAME -n$USER" &
+urxvt -e sh -c "wmctrl -r :ACTIVE: -b toggle,fullscreen; tmux -q has-session && exec tmux attach-session -d || exec tmux new-session -s\$USER@\$HOSTNAME -n\$USER" &
 EOF
