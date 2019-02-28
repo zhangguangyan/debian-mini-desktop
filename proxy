@@ -1,0 +1,16 @@
+a2enmod proxy
+a2enmod proxy_http
+a2enmod proxy_balancer
+a2enmod lbmethod_byrequests
+cat << EOF > /etc/apache2/sites-available/000-default.conf
+<VirtualHost *:80>
+    ProxyPreserveHost On
+
+    ProxyPass / http://10.0.63.31:8080/
+    ProxyPassReverse / http://10.0.63.31:8080/
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+EOF
+systemctl restart apache2
