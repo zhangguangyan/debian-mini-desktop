@@ -1,0 +1,22 @@
+    3  /usr/lib/nux/unity_support_test -p
+    6  sudo apt install dkms build-essential module-assistant
+    7  sudo m-a prepare 
+   10  sudo ./VBoxLinuxAdditions.run 
+   16  snap install --classic code
+   17  sudo snap install intellij-idea-ultimate --classic
+   18  sudo snap install node --channel=10/stable --classic
+   25  sudo apt install -y synapse 
+   28  sudo apt install -y tmux
+   32  sudo apt install -y i3
+   43  snap list
+   44  snap remove code intellij-idea-ultimate  node
+   56  sudo apt install -y gparted
+   82  sudo apt install -y rxvt-unicode-256color
+  125  sudo cp debian-mini-desktop/dotfiles/git-0* /etc/profile.d/
+  265  git config --global user.email "gavin.g.zhang@gmail.com"
+  267  git config --global user.name "guangyan zhang"
+  266  git config --global -l
+  284  sudo apt-add-repository ppa:git-core/ppa
+  285  sudo apt update 
+  287  sudo apt full-upgrade -y
+  301  find . -name '*wrapper.properties' -exec sed -i 's/5\.2\.1/5\.4\.1/g' {} \;

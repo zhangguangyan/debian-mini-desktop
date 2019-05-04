@@ -3,23 +3,17 @@ set -e
 set -x
 #---- dev tools
 apt install -y git vim curl openjdk-8-jdk
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
 
 #--- docker
-wget -qO - https://download.docker.com/linux/debian/gpg | apt-key add -
-echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
+wget -qO - https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
 apt update && apt install -y docker-ce
 usermod -aG docker gz
 
-#--- node & yarn
-version='v6.11.0'
-to=/opt/node
-wget -qO n.tar.xz "https://nodejs.org/dist/${version}/node-${version}-linux-x64.tar.xz"
-[ -d "$to" ] || mkdir "${to}"
-tar xJf n.tar.xz -C "${to}" --strip-components 1
-[ -L /usr/bin/node ] || ln -s "${to}/bin/node" /usr/bin
-[ -L /usr/bin/npm ] || ln -s "${to}/bin/npm" /usr/bin
-npm install --global yarn
-[ -L /usr/bin/yarn ] || ln -s "${to}/bin/yarn" /usr/bin
+curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 
 #--- vs code
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
