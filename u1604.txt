@@ -20,3 +20,104 @@
   285  sudo apt update 
   287  sudo apt full-upgrade -y
   301  find . -name '*wrapper.properties' -exec sed -i 's/5\.2\.1/5\.4\.1/g' {} \;
+
+----
+
+https://docs.microsoft.com/en-us/dotnet/api/azure.security.keyvault.secrets.secretclient.getsecretasync?view=azure-dotnet-preview
+
+// Create an instance of the mock HttpMessageHandler
+var mockHandler = new Mock<HttpMessageHandler>();
+
+// Set up the handler to return a successful response with content
+var responseContent = "Hello, world!";
+var response = new HttpResponseMessage(HttpStatusCode.OK);
+response.Content = new StringContent(responseContent);
+mockHandler.Protected()
+    .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+    .ReturnsAsync(response);
+
+// Create an instance of HttpClient that uses the mock handler
+var client = new HttpClient(mockHandler.Object);
+
+// Use the client to send a request
+var request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
+var result = await client.SendAsync(request);
+
+// Assert that the response is successful and has the expected content
+Assert.True(result.IsSuccessStatusCode);
+Assert.Equal(responseContent, await result.Content.ReadAsStringAsync());
+
+-------
+using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Xunit;
+using Moq;
+using Moq.Protected;
+
+// ...
+
+[Fact]
+public async Task Test_500_Error_Response()
+{
+    // Create the mock HttpMessageHandler
+    var mockHandler = new Mock<HttpMessageHandler>();
+
+    // Configure the SendAsync method to return a response with a 500 status code
+    mockHandler.Protected()
+        .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+        .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.InternalServerError));
+
+    // Create the HttpClient instance using the mock HttpMessageHandler
+    var httpClient = new HttpClient(mockHandler.Object);
+
+    // Use the HttpClient instance to make a request
+    var response = await httpClient.GetAsync("http://example.com");
+
+    // Check that the response has the expected status code (500)
+    Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
+}
+
+-----
+
+var mockHandler = new Mock<HttpMessageHandler>();
+mockHandler.Protected()
+    .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+    .ThrowsAsync(new TaskCanceledException());
+
+var httpClient = new HttpClient(mockHandler.Object)
+{
+    Timeout = TimeSpan.FromSeconds(10)
+};
+
+// Use httpClient to make an HTTP request, which will now time out after 10 seconds
+
+----
+string json = @"{
+    ""section1"": {
+        ""prop1"": ""val1""
+    },
+    ""section2"": {
+        ""prop1"": ""val1""
+    }
+}";
+
+var config = new ConfigurationBuilder()
+    .AddJsonString(json)
+    .Build();
+
+var mockConfig = new Mock<IConfiguration>();
+mockConfig.Setup(x => x.GetSection("section1")).Returns(config.GetSection("section1"));
+mockConfig.Setup(x => x.GetSection("section2")).Returns(config.GetSection("section2"));
+---
+// Create a mock IConfiguration instance
+Mock<IConfiguration> configMock = new Mock<IConfiguration>();
+
+// Set up the configuration section for the DataClass
+configMock.Setup(x => x.GetSection<DataClass>("section")).Returns(new DataClass()
+{
+    // Set the properties of the DataClass as needed
+    Prop1 = "value1",
+    Prop2 = "value2"
+});
