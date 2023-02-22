@@ -121,3 +121,43 @@ configMock.Setup(x => x.GetSection<DataClass>("section")).Returns(new DataClass(
     Prop1 = "value1",
     Prop2 = "value2"
 });
+
+
+using Azure.Security.KeyVault.Secrets;
+using Moq;
+using System.Threading;
+using System.Threading.Tasks;
+using Xunit;
+
+namespace YourNamespace.Tests
+{
+    public class YourTestClass
+    {
+        [Fact]
+        public async Task TestSecretNotFoundAsync()
+        {
+            // Arrange
+            var mockSecretClient = new Mock<SecretClient>();
+            string secretName = "your-secret-name";
+            string vaultUri = "https://your-key-vault-name.vault.azure.net/";
+
+            // Set up the behavior of the SecretClient to throw a SecretNotFoundException
+            mockSecretClient
+                .Setup(s => s.GetSecretAsync(secretName, null, CancellationToken.None))
+                .ThrowsAsync(new SecretNotFoundException($"Secret '{secretName}' not found"));
+
+            // Use the mock SecretClient in your class or method that requires it
+            var classUnderTest = new YourClass(mockSecretClient.Object);
+
+            // Act
+            // Call the method that uses the SecretClient
+            var result = await classUnderTest.YourMethodAsync(secretName, vaultUri);
+
+            // Assert
+            // Assert that the expected exception is thrown
+            Assert.NotNull(result);
+            Assert.IsType<SecretNotFoundException>(result);
+        }
+    }
+}
+
