@@ -43,3 +43,6 @@ public class LoggingEndpointBehavior : IEndpointBehavior
     }
 }
 ```
+```
+dotnet-svcutil http://localhost:1234/myservice?wsdl --outputDir MyService --use-string-overrides
+```
