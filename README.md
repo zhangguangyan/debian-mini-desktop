@@ -73,3 +73,20 @@ public object BeforeSendRequest(ref Message request, IClientChannel channel)
     return null;
 }
 ```
+```
+var binding = new WSHttpBinding();
+binding.Security.Mode = SecurityMode.Transport;
+
+var endpoint = new EndpointAddress("https://example.com/MyService");
+
+var client = new MyServiceClient(binding, endpoint);
+
+using (var scope = new OperationContextScope(client.InnerChannel))
+{
+    var httpRequestProperty = new HttpRequestMessageProperty();
+    httpRequestProperty.Headers.Add("CustomHeader", "CustomValue");
+    OperationContext.Current.OutgoingMessageProperties[HttpRequestMessageProperty.Name] = httpRequestProperty;
+
+    client.MyMethod();
+}
+```
