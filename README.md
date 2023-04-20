@@ -46,3 +46,30 @@ public class LoggingEndpointBehavior : IEndpointBehavior
 ```
 dotnet-svcutil http://localhost:1234/myservice?wsdl --outputDir MyService --use-string-overrides
 ```
+```
+public object BeforeSendRequest(ref Message request, IClientChannel channel)
+{
+    HttpRequestMessageProperty httpRequestMessage;
+    object httpRequestMessageObject;
+    if (request.Properties.TryGetValue(HttpRequestMessageProperty.Name, out httpRequestMessageObject))
+    {
+        httpRequestMessage = httpRequestMessageObject as HttpRequestMessageProperty;
+        if (httpRequestMessage != null && string.IsNullOrEmpty(httpRequestMessage.Headers["SOAPAction"]))
+        {
+            httpRequestMessage.Headers["SOAPAction"] = "MySoapAction";
+        }
+    }
+    else
+    {
+        httpRequestMessage = new HttpRequestMessageProperty();
+        httpRequestMessage.Headers.Add("SOAPAction", "MySoapAction");
+        request.Properties.Add(HttpRequestMessageProperty.Name, httpRequestMessage);
+    }
+    
+    // log the outgoing request
+    Console.WriteLine("Outgoing Request:");
+    Console.WriteLine(request.ToString());
+
+    return null;
+}
+```
