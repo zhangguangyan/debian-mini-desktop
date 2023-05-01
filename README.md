@@ -90,3 +90,47 @@ using (var scope = new OperationContextScope(client.InnerChannel))
     client.MyMethod();
 }
 ```
+```
+public interface IAuthorizationService
+{
+    bool IsAuthorized(string userId, string endpoint);
+}
+public class AuthorizationService : IAuthorizationService
+{
+    public bool IsAuthorized(string userId, string endpoint)
+    {
+        // Perform authorization logic here
+    }
+}
+services.AddScoped<IAuthorizationService, AuthorizationService>();
+public class AuthorizationMiddleware
+{
+    private readonly RequestDelegate _next;
+    private readonly IAuthorizationService _authorizationService;
+
+    public AuthorizationMiddleware(RequestDelegate next, IAuthorizationService authorizationService)
+    {
+        _next = next;
+        _authorizationService = authorizationService;
+    }
+
+    public async Task InvokeAsync(HttpContext context)
+    {
+        // Get the user ID and endpoint from the request
+        var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var endpoint = context.Request.Path;
+
+        // Check if the user is authorized to access the endpoint
+        if (!_authorizationService.IsAuthorized(userId, endpoint))
+        {
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            await context.Response.WriteAsync("Unauthorized");
+            return;
+        }
+
+        // Call the next middleware in the pipeline
+        await _next(context);
+    }
+}
+app.UseMiddleware<AuthorizationMiddleware>();
+```
