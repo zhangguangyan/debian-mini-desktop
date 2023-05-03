@@ -134,3 +134,19 @@ public class AuthorizationMiddleware
 }
 app.UseMiddleware<AuthorizationMiddleware>();
 ```
+```
+public class RoleCodeTable
+{
+    public string Role { get; set; }
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+
+var joinedList = roles.Join(
+    codeTables,
+    role => role,
+    codeTable => codeTable.Role,
+    (role, codeTable) => new RoleCodeTable { Role = role, Name = codeTable.Name, Age = 30 }
+);
+var firstMatch = joinedList.DefaultIfEmpty(new { Role = "No role found", Name = "No name found" }).First();
+```
