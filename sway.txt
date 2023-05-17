@@ -1,0 +1,47 @@
+systemd-+-ModemManager---3*[{ModemManager}]
+        |-NetworkManager---3*[{NetworkManager}]
+        |-VGAuthService
+        |-accounts-daemon---3*[{accounts-daemon}]
+        |-avahi-daemon---avahi-daemon
+        |-colord---3*[{colord}]
+        |-cron
+        |-cups-browsed---3*[{cups-browsed}]
+        |-cupsd
+        |-dbus-daemon
+        |-gdm3-+-gdm-session-wor-+-gdm-wayland-ses-+-sway
+        |      |                 |                 `-3*[{gdm-wayland-ses}]
+        |      |                 `-3*[{gdm-session-wor}]
+        |      `-3*[{gdm3}]
+        |-irqbalance---{irqbalance}
+        |-2*[kerneloops]
+        |-multipathd---6*[{multipathd}]
+        |-packagekitd---3*[{packagekitd}]
+        |-polkitd---3*[{polkitd}]
+        |-power-profiles----3*[{power-profiles-}]
+        |-rsyslogd---3*[{rsyslogd}]
+        |-rtkit-daemon---2*[{rtkit-daemon}]
+        |-sh---foot-+-bash---pstree
+        |           `-2*[{foot}]
+        |-snapd---8*[{snapd}]
+        |-swaybar---sh---sleep
+        |-swaybg
+        |-switcheroo-cont---3*[{switcheroo-cont}]
+        |-systemd-+-(sd-pam)
+        |         |-dbus-daemon
+        |         |-gnome-keyring-d---4*[{gnome-keyring-d}]
+        |         |-pipewire---{pipewire}
+        |         |-pipewire-pulse---{pipewire-pulse}
+        |         |-wireplumber---4*[{wireplumber}]
+        |         `-xdg-permission----3*[{xdg-permission-}]
+        |-systemd-journal
+        |-systemd-logind
+        |-systemd-network
+        |-systemd-oomd
+        |-systemd-resolve
+        |-systemd-timesyn---{systemd-timesyn}
+        |-systemd-udevd
+        |-udisksd---5*[{udisksd}]
+        |-unattended-upgr---{unattended-upgr}
+        |-upowerd---3*[{upowerd}]
+        |-vmtoolsd---3*[{vmtoolsd}]
+        `-wpa_supplicant
