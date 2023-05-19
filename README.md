@@ -1,5 +1,7 @@
 # debian-mini-desktop
 
+<https://github.com/rodm/teamcity-dsl-extensions/blob/main/.teamcity/settings.kts>
+
 ```
 using System;
 using System.ServiceModel.Channels;
