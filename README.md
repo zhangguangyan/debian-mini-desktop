@@ -1,5 +1,38 @@
 # debian-mini-desktop
 
+```
+const axios = require('axios');
+const jobUrl = 'http://your-server.com/jobStatus'; // replace this with your server's URL
+
+const pollJobStatus = async () => {
+  const timeout = 60000; // stop polling after 1 minute
+  const startTime = Date.now();
+
+  try {
+    let jobDone = false;
+    while (!jobDone) {
+      if (Date.now() - startTime >= timeout) {
+        throw new Error('Job check timed out');
+      }
+
+      // we'll assume your server returns a JSON object like { status: "done" } when the job is complete
+      const response = await axios.get(jobUrl);
+      jobDone = response.data.status === 'done';
+
+      if (!jobDone) {
+        console.log('Job is not done, waiting...');
+        await new Promise(resolve => setTimeout(resolve, 5000)); // wait 5 seconds before polling again
+      }
+    }
+    console.log('Job is done!');
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+pollJobStatus();
+
+```
 <https://github.com/rodm/teamcity-dsl-extensions/blob/main/.teamcity/settings.kts>
 
 ```
