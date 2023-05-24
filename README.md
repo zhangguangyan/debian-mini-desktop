@@ -1,5 +1,14 @@
 # debian-mini-desktop
 ```
+npm install open
+
+const fs = require('fs');
+
+const cgroup = fs.readFileSync('/proc/self/cgroup', 'utf8');
+const isContainer = cgroup.includes('docker');
+
+```
+```
 const { Command } = require('commander');
 const program = new Command();
 
