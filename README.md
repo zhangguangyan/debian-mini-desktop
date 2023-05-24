@@ -1,5 +1,43 @@
 # debian-mini-desktop
+```
+const { Command } = require('commander');
+const program = new Command();
 
+const sharedOptions = (command) => {
+  return command
+    .option('-gh, --github <token>', 'github token')
+    .option('-tc, --teamcity <token>', 'teamcity token');
+};
+
+sharedOptions(program.command('init')
+  .description('execute the init'))
+  .option('-f, --from <org/repo>', 'repository to fork from')
+  .option('-t, --to <name>', 'your github account')
+  .argument('<tick no>', 'JIRA ticket number')
+  .action((ticketNo, options) => {
+    if (!options.github) {
+        throw new Error('Missing mandatory option: --github <type>');
+      }
+    console.log('init executed with:');
+    console.log(`Github: ${options.github}`);
+    console.log(`Teamcity: ${options.teamcity}`);
+    console.log(`From: ${options.from}`);
+    console.log(`To: ${options.to}`);
+    console.log(`Additional argument: ${ticketNo}`);
+  });
+
+sharedOptions(program.command('cleanup')
+  .description('execute the cleanup'))
+  .argument('<repo>', 'additional argument')
+  .action((repo, options) => {
+    console.log('cleanup executed with:');
+    console.log(`Github: ${options.github}`);
+    console.log(`Teamcity: ${options.teamcity}`);
+    console.log(`Additional argument: ${repo}`);
+  });
+
+program.parse(process.argv);
+```
 ```
 const axios = require('axios');
 const jobUrl = 'http://your-server.com/jobStatus'; // replace this with your server's URL
