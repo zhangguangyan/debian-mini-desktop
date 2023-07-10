@@ -1,3 +1,6 @@
+End-to-end (EZE) testing of the System of Record (SoR) is executed using the JavaScript testing framework, Jest. However, in accordance with the Software Development Life Cycle (SDLC) requirements, the test results must be documented in a Zephyr report. Manually creating these Zephyr reports within JIRA is time-consuming. Therefore, it's crucial that we devise a solution for automatically updating the Zephyr report in JIRA, thereby increasing efficiency and reducing manual labor.
+
+
 ### Reflecting on your experiences working with me on Core Interfaces, what have observed me do effectively that added value. What could I do differently next time to achieve even better outcomes?
 
 Sure, here are ten example responses, each within 150 words:
