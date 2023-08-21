@@ -1,4 +1,12 @@
-    3  /usr/lib/nux/unity_support_test -p
+```
+npm install open
+import open from 'open';
+await open('https://www.google.com');
+```
+
+
+
+3  /usr/lib/nux/unity_support_test -p
     6  sudo apt install dkms build-essential module-assistant
     7  sudo m-a prepare 
    10  sudo ./VBoxLinuxAdditions.run 
