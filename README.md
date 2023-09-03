@@ -1,3 +1,6 @@
+The Twelve-Factor App methodology emphasizes treating logs as event streams. Instead of managing log files on the disk, applications should continuously stream logs to stdout (standard output). This makes logs agnostic to what captures or stores them, promoting uniformity and scalability. External systems can then consume these streams, allowing for storage, indexing, and analysis. This separation of concerns ensures that the application remains stateless and maintains a clean contract with the environment in which it's running. Centralized logging solutions or services can be used to aggregate, analyze, and create alerts, thus decoupling application concerns from log management and storage.
+
+
 End-to-end (EZE) testing of the System of Record (SoR) is executed using the JavaScript testing framework, Jest. However, in accordance with the Software Development Life Cycle (SDLC) requirements, the test results must be documented in a Zephyr report. Manually creating these Zephyr reports within JIRA is time-consuming. Therefore, it's crucial that we devise a solution for automatically updating the Zephyr report in JIRA, thereby increasing efficiency and reducing manual labor.
 
 
