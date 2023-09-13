@@ -86,3 +86,32 @@ Outputs:
     Description: 'The DNS name of the load balancer'
     Value: !GetAtt [LoadBalancer, DNSName]
 
+---
+ECSTaskDefinition:
+  Type: AWS::ECS::TaskDefinition
+  Properties:
+    # ... other properties ...
+    ContainerDefinitions:
+      - Name: nginx
+        Image: nginx:latest
+        PortMappings:
+          - ContainerPort: 443
+        HealthCheck:
+          Command:
+            - CMD-SHELL
+            - "curl -f https://localhost/ || exit 1"
+          Interval: 30
+          Timeout: 5
+          Retries: 3
+        DependsOn:
+          - ContainerName: nodejs-app
+            Condition: HEALTHY
+      - Name: nodejs-app
+        Image: your-nodejs-app-image # Replace with your nodejs app image
+        HealthCheck:
+          Command:
+            - CMD-SHELL
+            - "curl -f http://localhost:app-port/ || exit 1" # Replace 'app-port' with the actual port your app is running on
+          Interval: 30
+          Timeout: 5
+          Retries: 3
