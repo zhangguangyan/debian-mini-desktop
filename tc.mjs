@@ -66,3 +66,105 @@ async function createBuild(buildName, projectName, templateId, params) {
     console.error('An error occurred:', error);
   }
 })();
+//----- Direct Traversal and Operation:
+async function createProject(name, parentId) {
+  // Implementation for creating a project and returning its ID.
+  // This is just a placeholder and would need to be replaced with actual logic.
+  console.log(`Creating project ${name} under parent ID ${parentId}`);
+  return `${name}-ID`;
+}
+
+async function createBuild(name, parentId, params) {
+  // Implementation for creating a build.
+  // This is just a placeholder.
+  console.log(`Creating build ${name} under parent ID ${parentId} with params ${JSON.stringify(params)}`);
+}
+
+async function processNode(node, parentId = null) {
+  if (node.type === 'project') {
+    const newProjectId = await createProject(node.name, parentId);
+
+    if (node.children) {
+      for (const child of node.children) {
+        await processNode(child, newProjectId);
+      }
+    }
+  } else if (node.type === 'build') {
+    await createBuild(node.name, parentId, node.params);
+  }
+}
+
+//--------- Visitor-like Pattern for JSON
+class JsonVisitor {
+  visitProject(node, parentId) {
+    // Default behavior, can be overridden.
+  }
+
+  visitBuild(node, parentId) {
+    // Default behavior, can be overridden.
+  }
+}
+
+function visitNode(node, visitor, parentId = null) {
+  if (node.type === 'project') {
+    const newProjectId = visitor.visitProject(node, parentId);
+    if (node.children) {
+      for (const child of node.children) {
+        visitNode(child, visitor, newProjectId);
+      }
+    }
+  } else if (node.type === 'build') {
+    visitor.visitBuild(node, parentId);
+  }
+}
+
+class CreationVisitor extends JsonVisitor {
+  visitProject(node, parentId) {
+    // This could also be async with some modifications.
+    console.log(`Creating project ${node.name} under parent ID ${parentId}`);
+    return `${node.name}-ID`;
+  }
+
+  visitBuild(node, parentId) {
+    console.log(`Creating build ${node.name} under parent ID ${parentId} with params ${JSON.stringify(node.params)}`);
+  }
+}
+
+//---------- Formal Visitor Pattern
+class ProjectElement {
+  constructor(name, children) {
+    this.name = name;
+    this.children = children || [];
+  }
+
+  accept(visitor, parentId) {
+    const newId = visitor.visitProject(this, parentId);
+    this.children.forEach(child => child.accept(visitor, newId));
+  }
+}
+
+class BuildElement {
+  constructor(name, params) {
+    this.name = name;
+    this.params = params;
+  }
+
+  accept(visitor, parentId) {
+    visitor.visitBuild(this, parentId);
+  }
+}
+
+class CreationVisitor {
+  visitProject(element, parentId) {
+    console.log(`Creating project ${element.name} under parent ID ${parentId}`);
+    return `${element.name}-ID`;
+  }
+
+  visitBuild(element, parentId) {
+    console.log(`Creating build ${element.name} under parent ID ${parentId} with params ${JSON.stringify(element.params)}`);
+  }
+}
+
+const root = new ProjectElement("RootProject", [new BuildElement("Build1", {param: "value"})]);
+root.accept(new CreationVisitor());
+
