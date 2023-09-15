@@ -165,6 +165,48 @@ class CreationVisitor {
   }
 }
 
-const root = new ProjectElement("RootProject", [new BuildElement("Build1", {param: "value"})]);
-root.accept(new CreationVisitor());
+function createStructureFromJson(json) {
+  if (json.type === "project") {
+    const children = (json.children || []).map(childJson => createStructureFromJson(childJson));
+    return new ProjectElement(json.name, children);
+  } else if (json.type === "build") {
+    return new BuildElement(json.name, json.params);
+  }
+}
 
+// const root = new ProjectElement("RootProject", [new BuildElement("Build1", {param: "value"})]);
+const root = createStructureFromJson(data)
+root.accept(new CreationVisitor(), 'parentProjId');
+
+const data = {
+    "name": "p1",
+    "type": "project",
+    "children": [
+        {
+            "type": "build",
+            "name": "build1",
+            "params": {
+                "param1": "value1",
+                "param2": "value2"
+            }
+        },
+        {
+            "type": "project",
+            "name": "p2"
+        },
+        {
+            "type": "project",
+            "name": "p3",
+            "children": [
+                {
+                    "type": "build",
+                    "name": "build1",
+                    "params": {
+                        "param1": "value1",
+                        "param2": "value2"
+                    }
+                }
+            ]
+        }
+    ]
+};
