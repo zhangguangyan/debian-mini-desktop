@@ -2,29 +2,28 @@ import ts from "typescript";
 
 const json = {
     "Name": "string",
-    "Item[]": {
+    "Item": [{
         "code": "string",
-        "nested1[]": {
+        "nested1": [{
             "p1": "string",
             "p2": "string",
-            "nested2[]": {
+            "nested2": [{
                 "p1": "string",
                 "p2": "string",
-            } 
-        } 
-    }
+            }]
+        }]
+    }]
 };
 
 function translate(json) {
     return Object.keys(json).map((key) => {
-        if (key.endsWith("[]")) {
-            const propertyName = key.slice(0, -2);
-            const subType = json[key];
+        if (Array.isArray(json[key])) {
+            const subType = json[key][0];
             const subMembers = translate(subType);  // Recursion to handle nested structures
             const typeLiteralNode = ts.factory.createTypeLiteralNode(subMembers);
             return ts.factory.createPropertySignature(
                 undefined,
-                propertyName,
+                key,
                 ts.factory.createToken(ts.SyntaxKind.QuestionToken),
                 ts.factory.createArrayTypeNode(typeLiteralNode)
             );
@@ -62,7 +61,6 @@ function generateTypeScript(json) {
     const members = translate(json);
 
     const typeNode1 = createTypeDeclaration("MyType1", members);
-    const typeNode2 = createTypeDeclaration("MyType2", members);
 
     const resultFile = ts.createSourceFile(
         "dummy.ts",
@@ -72,7 +70,7 @@ function generateTypeScript(json) {
         ts.ScriptKind.TS
     );
 
-    const updatedResultFile = ts.factory.updateSourceFile(resultFile, [typeNode1, typeNode2]);
+    const updatedResultFile = ts.factory.updateSourceFile(resultFile, [typeNode1]);
 
     const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
     return printer.printFile(updatedResultFile);
