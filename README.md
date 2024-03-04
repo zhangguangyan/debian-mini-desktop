@@ -1,3 +1,5 @@
+sed ':a; s/^\(\([^=]*\) \)\(.*=\)/\1_\3/; ta'
+
 The Twelve-Factor App methodology emphasizes treating logs as event streams. Instead of managing log files on the disk, applications should continuously stream logs to stdout (standard output). This makes logs agnostic to what captures or stores them, promoting uniformity and scalability. External systems can then consume these streams, allowing for storage, indexing, and analysis. This separation of concerns ensures that the application remains stateless and maintains a clean contract with the environment in which it's running. Centralized logging solutions or services can be used to aggregate, analyze, and create alerts, thus decoupling application concerns from log management and storage.
 
 
