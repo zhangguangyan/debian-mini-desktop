@@ -1,0 +1,49 @@
+const fs = require('fs');
+const sax = require('sax');
+
+// Read WSDL file
+const wsdl = fs.readFileSync('service.wsdl', 'utf8');
+
+// Create a SAX parser
+const parser = sax.parser(true);
+
+// Variables to hold extracted XSD
+let isInTypes = false;
+let xsd = '';
+
+// Event handlers
+parser.onopentag = (node) => {
+    if (node.name === 'wsdl:types') {
+        isInTypes = true;
+    }
+    if (isInTypes) {
+        xsd += `<${node.name}`;
+        for (let attr in node.attributes) {
+            xsd += ` ${attr}="${node.attributes[attr]}"`;
+        }
+        xsd += '>';
+    }
+};
+
+parser.ontext = (text) => {
+    if (isInTypes) {
+        xsd += text;
+    }
+};
+
+parser.onclosetag = (nodeName) => {
+    if (isInTypes) {
+        xsd += `</${nodeName}>`;
+    }
+    if (nodeName === 'wsdl:types') {
+        isInTypes = false;
+    }
+};
+
+// Parse the WSDL
+parser.write(wsdl).close();
+
+// Output the extracted XSD
+console.log('Extracted XSD:', xsd);
+
+// Now you can use another library to convert the extracted XSD to JSON Schema
