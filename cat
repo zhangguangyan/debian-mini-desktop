@@ -1,0 +1,38 @@
+01	Standard price (RRP)
+02	Standard Benefit Margin (SBP)
+03	Standard Benefit Waiver (SBP)
+04	Campaign Margin
+05	Campaign Waiver
+06	Discretionary Margin Above
+07	Quoted Rate
+08	Discretionary Waiver Amount / Percentage
+09	Discretionary Margin Below
+10	Collectors
+11	Redefined Discretionary Standard Condition
+12	Discretionary Fee Increase (Amount Margin)
+13	Negotiated Price
+14	Discretionary Fee Decrease (Amount Margin)
+15	Ebilling Waiver
+16	External (Base) Reference Rate
+17	Positive External Margin
+18	Negative External Margin
+19	External Base Fixed
+20	External Base Market
+22	External Base Fee Amount
+23	External Base Fee Percentage
+24	Fixed Value Interest
+25	Interest in Advance
+26	Facility Margin Disc
+27	Facility Margin NBP
+28	IRRM
+29	Liquidity Fee
+30	External CR interest
+31	DI Migration Adjustment
+32	External fixed liquidity Fee
+33	Package Benefit Margin
+34	External Package Benefit Margin
+35	External Package Benefit Waiver
+36	Individual Benefit Margin
+70	Carded (Migrated)
+71	Discretionary (Migrated)
+88	Technical Pricing
