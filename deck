@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Development Processes Brownbag Session</title>
+    <meta name="description" content="Development Processes Brownbag Session">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.css">
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h1>Introduction to Development Processes</h1>
+                <p>For New Developers and Joiners</p>
+                <p>Date: [Insert Date]</p>
+                <p>Presenter: [Your Name]</p>
+            </section>
+            <section>
+                <h2>Agenda</h2>
+                <ul>
+                    <li>Preferred Tools</li>
+                    <li>Tool Setup</li>
+                    <li>Access Requirements</li>
+                    <li>Version Control Processes</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Preferred Tools Overview</h2>
+                <ul>
+                    <li>Development Environment</li>
+                    <li>Version Control</li>
+                    <li>Collaboration Tools</li>
+                    <li>Project Management</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Development Environment Tools</h2>
+                <ul>
+                    <li>Visual Studio Code</li>
+                    <li>IntelliJ IDEA</li>
+                    <li>Xcode (for iOS development)</li>
+                    <li>Terminal</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Version Control Tools</h2>
+                <ul>
+                    <li>Git</li>
+                    <li>GitHub Desktop</li>
+                    <li>SourceTree</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Collaboration Tools</h2>
+                <ul>
+                    <li>Slack</li>
+                    <li>Microsoft Teams</li>
+                    <li>Zoom</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Project Management Tools</h2>
+                <ul>
+                    <li>Jira</li>
+                    <li>Trello</li>
+                    <li>Asana</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Setting Up Visual Studio Code</h2>
+                <ul>
+                    <li>Installation</li>
+                    <li>Extensions for Development</li>
+                    <li>Basic Configuration</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Setting Up IntelliJ IDEA</h2>
+                <ul>
+                    <li>Installation</li>
+                    <li>Plugins for Development</li>
+                    <li>Basic Configuration</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Setting Up Xcode</h2>
+                <ul>
+                    <li>Installation</li>
+                    <li>Initial Setup</li>
+                    <li>Creating a New Project</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Using the Terminal</h2>
+                <ul>
+                    <li>Basic Commands</li>
+                    <li>Customizing the Terminal</li>
+                    <li>Useful Shortcuts</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Installing Git</h2>
+                <ul>
+                    <li>Homebrew Installation</li>
+                    <li>Configuring Git</li>
+                    <li>Verifying Installation</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Setting Up GitHub Desktop</h2>
+                <ul>
+                    <li>Installation</li>
+                    <li>Connecting to GitHub</li>
+                    <li>Basic Usage</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Using SourceTree</h2>
+                <ul>
+                    <li>Installation</li>
+                    <li>Connecting to Repositories</li>
+                    <li>Basic Usage</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Setting Up Slack</h2>
+                <ul>
+                    <li>Downloading the App</li>
+                    <li>Joining Workspaces</li>
+                    <li>Basic Features</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Using Microsoft Teams</h2>
+                <ul>
+                    <li>Installation</li>
+                    <li>Joining Teams and Channels</li>
+                    <li>Basic Features</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Setting Up Zoom</h2>
+                <ul>
+                    <li>Downloading the App</li>
+                    <li>Scheduling Meetings</li>
+                    <li>Joining Meetings</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Access Requirements Overview</h2>
+                <ul>
+                    <li>Types of Access Needed</li>
+                    <li>Requesting Access</li>
+                    <li>Managing Permissions</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Access to Source Code Repositories</h2>
+                <ul>
+                    <li>GitHub Access</li>
+                    <li>GitLab Access</li>
+                    <li>Bitbucket Access</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Access to Development Environments</h2>
+                <ul>
+                    <li>Local Environment Setup</li>
+                    <li>Cloud Environment Setup</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Access to Project Management Tools</h2>
+                <ul>
+                    <li>Jira Access</li>
+                    <li>Trello Access</li>
+                    <li>Asana Access</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Access to Collaboration Tools</h2>
+                <ul>
+                    <li>Slack Access</li>
+                    <li>Microsoft Teams Access</li>
+                    <li>Zoom Access</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Version Control Processes Overview</h2>
+                <ul>
+                    <li>Importance of Version Control</li>
+                    <li>Basic Git Commands</li>
+                    <li>Workflow Best Practices</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Checking Out Code</h2>
+                <ul>
+                    <li>Cloning a Repository</li>
+                    <li>Checking Out Branches</li>
+                    <li>Viewing Commit History</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Pulling Changes</h2>
+                <ul>
+                    <li>Fetching vs. Pulling</li>
+                    <li>Resolving Conflicts</li>
+                    <li>Updating Local Repository</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Merging Changes</h2>
+                <ul>
+                    <li>Creating Pull Requests</li>
+                    <li>Code Reviews</li>
+                    <li>Merging Branches</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Additional Tips and Tricks</h2>
+                <ul>
+                    <li>Using Aliases</li>
+                    <li>Automating Tasks with Scripts</li>
+                    <li>Keeping Environment Clean</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Resources for Further Learning</h2>
+                <ul>
+                    <li>Official Documentation</li>
+                    <li>Online Tutorials</li>
+                    <li>Community Forums</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Q&A Session</h2>
+                <ul>
+                    <li>Open Floor for Questions</li>
+                    <li>Clarifying Doubts</li>
+                    <li>Providing Additional Resources</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Closing Remarks</h2>
+                <ul>
+                    <li>Recap of the Session</li>
+                    <li>Next Steps</li>
+                    <li>Contact Information</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+   
