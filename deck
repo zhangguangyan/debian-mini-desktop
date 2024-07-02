@@ -257,4 +257,54 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Development Processes Brownbag Session</title>
+    <meta name="description" content="Development Processes Brownbag Session">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.css">
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section>
+                <h1>Development Processes Brownbag Session</h1>
+                <p>For New Developers and Joiners</p>
+                <p>Date: [Insert Date]</p>
+                <p>Presenter: [Your Name]</p>
+            </section>
+            <section>
+                <h2>Agenda</h2>
+                <ul>
+                    <li>Preferred Tools</li>
+                    <li>Tool Setup</li>
+                    <li>Access Requirements</li>
+                    <li>Version Control Processes</li>
+                </ul>
+            </section>
+            <section data-markdown="slides/section1.md"></section>
+            <section data-markdown="slides/section2.md"></section>
+            <section data-markdown="slides/section3.md"></section>
+            <section data-markdown="slides/section4.md"></section>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/markdown/markdown.min.js"></script>
+    <script>
+        Reveal.initialize({
+            markdown: {
+                smartypants: true
+            }
+        });
+    </script>
+</body>
+</html>
+
    
