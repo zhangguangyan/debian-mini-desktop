@@ -15,3 +15,12 @@ title: Example Slide
 <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
   <img src="path/to/your/image.png" style="max-width: 100%; max-height: 100%;" />
 </div>
+
+---
+title: Centered Content Example
+---
+
+<div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+  <!-- Your content here -->
+  <p>This is centered content.</p>
+</div>
