@@ -7,3 +7,11 @@ Data Collection and Standardization	Uses metrics, logs, and traces to infer syst
 Enhanced Insights and Troubleshooting	Visualizes, analyzes, and alerts on telemetry data for deeper insights and faster issue identification.	Feeds telemetry data into observability platforms, enhancing insights and troubleshooting capabilities.
 Flexibility and Extensibility	Supports evolving observability practices and tools.	Modular architecture allows integration with various observability backends, providing flexibility.
 Conclusion	Defines the practice and objectives of understanding and monitoring systems.	Provides standardized tools and methods to achieve observability objectives, forming a comprehensive approach together.
+
+---
+title: Example Slide
+---
+
+<div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+  <img src="path/to/your/image.png" style="max-width: 100%; max-height: 100%;" />
+</div>
