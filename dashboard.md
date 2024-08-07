@@ -86,3 +86,6 @@ Regularly review the dashboard to ensure it provides the necessary insights.
 Adjust and refine the visualizations based on feedback and evolving requirements.
 Add alerts based on specific thresholds to get notified of performance issues.
 By following these steps, you can create a comprehensive dashboard that provides valuable insights into the performance and behavior of your HTTP client requests.
+
+
+sum by (le) (rate(http_client_duration_milliseconds_bucket[5m]))
