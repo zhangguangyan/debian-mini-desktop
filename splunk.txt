@@ -1,0 +1,8 @@
+    const response = await fetch("https://www.qantas.com.au/services/collector", {
+        method: "POST",
+        body: '{"source": "Unicard-identityONE", "sourcetype": "unicard:eventlog", "event":[]}',
+        headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "Authorization": "Splunk E3F27D4B-4B05-4A02-8B19-9B302919B3B5",
+        }
+    });
