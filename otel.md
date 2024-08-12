@@ -69,3 +69,63 @@ OpenTelemetry Attributes ≈ Prometheus Labels: Both are key-value pairs that ad
 
 So, while there is some conceptual overlap, a Prometheus Metric is more analogous to the combination of an OpenTelemetry Instrument and its associated Attributes (and possibly multiple Measurements over time).
 
+
+The @opentelemetry/instrumentation-express package provides additional instrumentation specific to Express.js applications, building on top of the base HTTP instrumentation provided by @opentelemetry/instrumentation-http. Here’s a detailed look at what @opentelemetry/instrumentation-express adds:
+
+Base Metrics from @opentelemetry/instrumentation-http
+As a quick recap, @opentelemetry/instrumentation-http provides general HTTP client and server metrics like:
+
+http.client.duration (Histogram)
+http.server.duration (Histogram)
+http.client.active_requests (Gauge)
+http.server.active_requests (Gauge)
+http.client.errors (Counter)
+http.server.errors (Counter)
+Additional Metrics Provided by @opentelemetry/instrumentation-express
+Enhanced HTTP Server Metrics
+
+http.server.duration (Enhanced)
+Additional Labels: The Express instrumentation typically adds more context to the http.server.duration metric with Express-specific labels:
+http.route: The route pattern matched by the request (e.g., /users/:id).
+http.route.name: The name of the route if specified.
+This provides more granularity in analyzing the performance of specific routes rather than just the entire server.
+Express Middleware Metrics
+
+express.middleware.duration
+
+Type: Histogram
+Description: Measures the time taken by each middleware function in the Express app.
+Labels:
+express.name: The name of the middleware function.
+express.type: The type of middleware (e.g., application, router).
+http.route: The route associated with the middleware.
+This metric is useful for identifying performance bottlenecks in specific middleware functions.
+express.middleware.errors
+
+Type: Counter
+Description: Counts the number of errors encountered in Express middleware functions.
+Labels:
+express.name: The name of the middleware function where the error occurred.
+http.route: The route associated with the middleware.
+Useful for tracking error rates in middleware and pinpointing problematic components.
+Request Handling Metrics
+
+express.request.duration
+Type: Histogram
+Description: Measures the total time taken to handle a request from start to finish in the Express application.
+Labels:
+http.method: HTTP method (GET, POST, etc.).
+http.route: Route pattern matched.
+http.status_code: The HTTP status code returned.
+express.route.name: If the route has a custom name.
+This metric provides a comprehensive view of the latency of requests specific to routes in Express.
+Summary
+The @opentelemetry/instrumentation-express package extends the base HTTP metrics with Express-specific details, providing deeper insights into:
+
+Route-level performance: By adding labels for routes and middleware, you can break down performance data by specific parts of your application.
+Middleware metrics: Understanding the impact of middleware on request handling time and identifying bottlenecks.
+Error tracking: Granular error metrics for both request handling and middleware.
+These additional metrics are critical for analyzing and improving the performance and reliability of Express.js applications, giving you more detailed observability into how different parts of your application are behaving.
+
+
+
