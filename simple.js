@@ -5,7 +5,7 @@ function removeEmpty(obj) {
             .map(removeEmpty)
             .filter(el => el !== undefined && (typeof el !== 'object' || Object.keys(el).length > 0));
 
-        return filteredArray.length ? filteredArray : [];
+        return filteredArray;
     } else if (typeof obj === 'object' && obj !== undefined) {
         // Clean each property recursively
         const cleanedObj = Object.keys(obj).reduce((acc, key) => {
