@@ -1,0 +1,122 @@
+Given the metrics http_server_duration_milliseconds_bucket, http_server_duration_milliseconds_sum, and http_server_duration_milliseconds_count, there are several useful charts you can create to monitor and analyze the performance of your HTTP server. Here are the top 10 common charts:
+
+1. Request Rate (Throughput)
+Metric: rate(http_server_duration_milliseconds_count[5m])
+Chart: Line chart showing the number of requests processed per second over time.
+Purpose: To monitor the overall throughput of your server.
+2. Average Request Duration
+Metric: rate(http_server_duration_milliseconds_sum[5m]) / rate(http_server_duration_milliseconds_count[5m])
+Chart: Line chart showing the average duration of requests over time.
+Purpose: To track the average time it takes to process a request.
+3. Latency Distribution (Heatmap)
+Metric: rate(http_server_duration_milliseconds_bucket[5m])
+Chart: Heatmap chart showing the distribution of request latencies.
+Purpose: To visualize how request latencies are spread across different duration buckets.
+4. Latency Percentiles
+Metric:
+promql
+Copy code
+histogram_quantile(0.5, sum(rate(http_server_duration_milliseconds_bucket[5m])) by (le))
+histogram_quantile(0.9, sum(rate(http_server_duration_milliseconds_bucket[5m])) by (le))
+histogram_quantile(0.99, sum(rate(http_server_duration_milliseconds_bucket[5m])) by (le))
+Chart: Line chart showing the 50th, 90th, and 99th percentiles of request durations.
+Purpose: To monitor the latency experience of most users and identify outliers.
+5. Total Request Count
+Metric: increase(http_server_duration_milliseconds_count[1h])
+Chart: Bar chart showing the total number of requests processed per hour.
+Purpose: To visualize total traffic over time.
+6. Request Count by Status Code
+Metric: sum(rate(http_server_duration_milliseconds_count[5m])) by (http_status_code)
+Chart: Stacked area chart showing the rate of requests grouped by HTTP status code.
+Purpose: To track the distribution of response codes (e.g., 200, 404, 500) over time.
+7. Error Rate
+Metric: rate(http_server_duration_milliseconds_count{http_status_code=~"4..|5.."}[5m])
+Chart: Line chart showing the rate of error responses (4xx and 5xx status codes).
+Purpose: To monitor the error rate and detect issues in real-time.
+8. Cumulative Request Duration
+Metric: increase(http_server_duration_milliseconds_sum[1h])
+Chart: Bar chart showing the cumulative duration of all requests processed per hour.
+Purpose: To understand how much time is being spent processing requests over time.
+9. Request Rate vs. Latency
+Metric:
+X-axis: rate(http_server_duration_milliseconds_count[5m])
+Y-axis: rate(http_server_duration_milliseconds_sum[5m]) / rate(http_server_duration_milliseconds_count[5m])
+Chart: Scatter plot showing the relationship between request rate and average latency.
+Purpose: To analyze how increased traffic affects response times.
+10. Latency Breakdown by Path or Method
+Metric: sum(rate(http_server_duration_milliseconds_bucket[5m])) by (path)
+Chart: Stacked bar chart showing the latency distribution for different API paths or methods.
+Purpose: To identify which endpoints are contributing most to latency.
+Summary:
+These charts help in monitoring server performance, understanding traffic patterns, detecting issues, and ensuring that your service is operating efficiently. They provide a comprehensive view of how your server handles requests and how various factors (like traffic spikes or specific endpoints) affect performance.
+
+
+
+  Given the metrics http_server_duration_milliseconds_bucket, http_server_duration_milliseconds_sum, and http_server_duration_milliseconds_count, you can create a variety of charts to gain insights into your HTTP server's performance. Here are the top 10 common charts you might consider:
+
+1. Total Request Rate
+Query: rate(http_server_duration_milliseconds_count[5m])
+Description: Shows the average number of requests processed per second over the last 5 minutes.
+Purpose: To monitor the overall load on your server.
+2. Average Request Duration
+Query: rate(http_server_duration_milliseconds_sum[5m]) / rate(http_server_duration_milliseconds_count[5m])
+Description: Calculates the average duration of requests over the last 5 minutes.
+Purpose: To monitor the performance and response time of your server.
+3. Request Duration Percentiles (e.g., 50th, 90th, 95th, 99th)
+Query:
+promql
+Copy code
+histogram_quantile(0.95, sum(rate(http_server_duration_milliseconds_bucket[5m])) by (le))
+Description: Shows the 95th percentile of request durations over the last 5 minutes.
+Purpose: To understand the distribution of response times and identify performance outliers.
+4. Histogram of Request Durations
+Query:
+promql
+Copy code
+sum(rate(http_server_duration_milliseconds_bucket[5m])) by (le)
+Description: Visualizes the distribution of request durations over the last 5 minutes.
+Purpose: To analyze how many requests fall into different duration buckets.
+5. Total Request Count Over Time
+Query:
+promql
+Copy code
+increase(http_server_duration_milliseconds_count[1h])
+Description: Shows the total number of requests processed in the last hour.
+Purpose: To track the total workload over a longer period.
+6. Error Rate (Assuming HTTP Status Code Other Than 200)
+Query:
+promql
+Copy code
+rate(http_server_duration_milliseconds_count{http_status_code!="200"}[5m])
+Description: Shows the rate of error responses per second over the last 5 minutes.
+Purpose: To monitor the error rate and ensure the reliability of your server.
+7. Request Rate by HTTP Status Code
+Query:
+promql
+Copy code
+sum(rate(http_server_duration_milliseconds_count[5m])) by (http_status_code)
+Description: Breaks down the request rate by HTTP status code.
+Purpose: To identify the distribution of response status codes and detect issues.
+8. Latency Heatmap
+Query:
+promql
+Copy code
+sum(rate(http_server_duration_milliseconds_bucket[5m])) by (le)
+Description: Creates a heatmap of request durations to visualize latency over time.
+Purpose: To detect latency trends and potential performance degradation.
+9. Total Processing Time
+Query:
+promql
+Copy code
+increase(http_server_duration_milliseconds_sum[1h])
+Description: Shows the total processing time spent on requests in the last hour.
+Purpose: To analyze how much time is being spent handling requests.
+10. Request Rate by Path or Endpoint (Assuming Path Label is Available)
+Query:
+promql
+Copy code
+sum(rate(http_server_duration_milliseconds_count[5m])) by (path)
+Description: Breaks down the request rate by the request path or endpoint.
+Purpose: To understand the load on different endpoints and optimize performance.
+Summary:
+These charts help you monitor various aspects of your server's performance, including load, latency, error rates, and request distribution. By analyzing these metrics, you can gain valuable insights into the health and efficiency of your system, allowing you to make informed decisions and optimizations.
