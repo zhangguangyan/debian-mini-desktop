@@ -1,0 +1,8 @@
+3. Key Differences Summarized
+Aspect	Traditional Log-Based Monitoring	OpenTelemetry & Prometheus (Metrics-Based)
+Data Type	Unstructured or semi-structured logs	Structured time series metrics
+Data Collection	Event-driven (individual log entries)	Periodic scraping or pushing of metric data
+Data Storage	Log files or log management systems	Time series databases optimized for metrics
+Analysis Focus	Detailed event context and individual occurrences	Trends, aggregations, and real-time monitoring
+Performance Overhead	Higher due to log parsing and processing	Lower, as metrics are pre-structured and optimized for ingestion
+Use Cases	Troubleshooting, detailed auditing, forensic analysis	Performance monitoring, alerting, capacity planning
