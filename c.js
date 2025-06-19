@@ -22,3 +22,12 @@ function removeEmpty2(obj, isTopLevel = true) {
     // Return non-object value as is
     return obj;
 }
+
+var safe = Regex.Replace(
+    rawJson,
+    @"(?<!\\)[\u0000-\u001F]",
+    m => m.Value switch {
+        "\n" => @"\n", "\r" => @"\r", "\t" => @"\t",
+        _    => $@"\u{(int)m.Value[0]:x4}"
+    });
+
