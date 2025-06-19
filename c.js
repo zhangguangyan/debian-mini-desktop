@@ -67,3 +67,71 @@ public static class JsonSanitizer
 }
 
 
+using System;
+using System.Text;
+
+public static class JsonFixer
+{
+    /// <summary>
+    /// Scans the JSON text and escapes control characters that appear
+    /// *inside* string values.  If the input is already valid JSON, the
+    /// original reference is returned (zero allocations).
+    /// </summary>
+    public static string EscapeStringValues(string json)
+    {
+        // Fast exit: no control chars at all → already valid
+        ReadOnlySpan<char> span = json;
+        if (span.IndexOfAnyInRange('\u0000', '\u001F') == -1)
+            return json;
+
+        var sb       = new StringBuilder(json.Length + 8);
+        bool inStr   = false;   // are we inside a " ... " literal?
+        bool escaped = false;   // was the previous char a backslash?
+
+        foreach (char c in span)
+        {
+            if (!inStr)
+            {
+                // entering a string?
+                if (c == '\"') inStr = true;
+                sb.Append(c);
+                continue;
+            }
+
+            // We are *inside* a string literal …
+            if (escaped)                // part of an escape sequence → copy verbatim
+            {
+                sb.Append(c);
+                escaped = false;
+            }
+            else if (c == '\\')         // start of an escape sequence
+            {
+                sb.Append(c);
+                escaped = true;
+            }
+            else if (c == '\"')         // end of the string literal
+            {
+                sb.Append(c);
+                inStr = false;
+            }
+            else if (c <= 0x1F)         // raw control code → ESCAPE!
+            {
+                sb.Append(c switch
+                {
+                    '\n' => "\\n",
+                    '\r' => "\\r",
+                    '\t' => "\\t",
+                    _    => $"\\u{(int)c:x4}"
+                });
+            }
+            else                         // normal payload char
+            {
+                sb.Append(c);
+            }
+        }
+        return sb.ToString();
+    }
+}
+
+
+
