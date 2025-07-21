@@ -13,3 +13,10 @@
 | **Use with existing PostgreSQL tools or ORMs**   | ❌ Incompatible                              | ✅ Fully compatible                                |
 | **Application type: microservices, IoT, gaming** | ✅ Excellent fit                             | ❌ Possibly overkill                               |
 | **Application type: ERP, CRM, SaaS, analytics**  | ❌ Poor fit                                  | ✅ Ideal use case                                  |
+
+
+| **Use Case**                             | **Recommended**                        |
+| ---------------------------------------- | -------------------------------------- |
+| Dynamic rule-based routing API           | ✅ **Aurora PostgreSQL**                |
+| Complex date range and wildcard matching | ✅ **Aurora PostgreSQL**                |
+| Fast access with simple keys only        | ➖ DynamoDB (if very simple and static) |
