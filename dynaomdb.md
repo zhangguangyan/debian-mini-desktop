@@ -20,3 +20,6 @@
 | Dynamic rule-based routing API           | ✅ **Aurora PostgreSQL**                |
 | Complex date range and wildcard matching | ✅ **Aurora PostgreSQL**                |
 | Fast access with simple keys only        | ➖ DynamoDB (if very simple and static) |
+
+
+Use Aurora PostgreSQL unless you have extreme scale and fixed access patterns that justify DynamoDB’s complexity.
