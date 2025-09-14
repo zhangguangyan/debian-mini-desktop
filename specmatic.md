@@ -69,3 +69,18 @@ Maven Repository
 Docker: Useful when you don’t want Java/Node on runners; both OSS and commercial images exist. 
 markus.oberlehner.net
 +1
+
+
+Introduction
+
+We’re adopting API-first and shift-left practices to catch interface problems early—before they reach integration or production. Specmatic fits this perfectly: it treats our OpenAPI/AsyncAPI specs as the single source of truth and turns them into executable contract tests and spec-accurate stubs. That means we validate provider behavior at dev/PR time (shift-left), keep consumers unblocked with reliable mocks, and enforce backward compatibility as the spec evolves (API-first governance).
+
+Why this matters
+
+API-first: The spec isn’t just documentation; it drives tests, mocks, and change checks. Teams design and review the contract first, then implement.
+
+Shift-left quality: Contract tests run locally and in CI on every PR, detecting breaking changes (renames, field removals, tighter schemas) before merge.
+
+Faster consumer workflows: Specmatic stubs let front-ends and downstream services build and test without waiting for provider environments.
+
+Controlled change: Built-in backward-compat checks flag unsafe spec updates early, supporting predictable releases and safer refactors.
