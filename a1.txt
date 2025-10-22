@@ -1,0 +1,10 @@
+Hi [Manager’s Name],
+
+I wanted to take a moment to express my appreciation for [Name]’s help during the recent Specmatic onboarding process.
+
+His responsiveness, attention to detail, and technical expertise — especially in helping us configure the contract tests and troubleshoot CI integration — made a real difference and greatly contributed to the successful onboarding of Specmatic.
+
+It was a pleasure working with [Name], and his contribution added significant value to the onboarding effort.
+
+Best regards,
+[Your Name]
