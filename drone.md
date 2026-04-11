@@ -1,3 +1,5 @@
+`mavproxy.py --master tcp:127.0.0.1:5760 --console --load-module=horizon`
+
 ```
 Options:
 	--help|-h                display this help information
