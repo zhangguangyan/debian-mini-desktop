@@ -7,3 +7,5 @@ Icon=utilities-terminal
 Terminal=false
 Categories=System;TerminalEmulator;
 StartupNotify=true
+
+systemctl --user disable --now foot-server.socket foot-server.service
