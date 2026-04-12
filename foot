@@ -11,3 +11,9 @@ StartupNotify=true
 systemctl --user disable --now foot-server.socket foot-server.service
 sudo systemctl --global disable foot-server.service foot-server.socket
 
+~/.config/foot/foot.ini
+
+[csd]
+preferred=none
+size=0
+border-width=0
