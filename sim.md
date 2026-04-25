@@ -1,0 +1,2 @@
+- `mavproxy.py --master tcp:127.0.0.1:5760 --console --load-module=horizon --map`
+- `build/sitl/bin/arducopter --model + --home -35.363261,149.165230,584,353 --defaults Tools/autotest/default_params/copter.parm --enable-fgview`
