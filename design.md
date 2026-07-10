@@ -1,0 +1,22 @@
+## Design Principles
+
+- KISS: choose the simplest design that solves the current product problem clearly.
+- Fight complexity directly. Treat software design as an exercise in keeping the system understandable as it grows.
+- Prefer deep modules: simple interfaces that hide internal complexity are better than shallow wrappers with leaky or noisy interfaces.
+- Avoid pass-through layers. Add a layer only when it removes complexity, isolates a real concern, or gives the caller a meaningfully better abstraction.
+- Hide information deliberately. Do not leak provider internals, prompt shapes, storage details, or UI implementation details across boundaries unless the caller truly needs them.
+- Keep names simple and precise. If a function, file, or concept is hard to name, re-check the design.
+- Separate general-purpose code from special-purpose product behavior.
+- Follow Domain-Driven Design where it clarifies the product: use domain language such as essay, draft version, rewrite issue, rewrite action, rubric score, report, student profile, and teacher review.
+- Keep domain logic separate from transport/UI/provider code. AI provider adapters should translate into domain objects; they should not define the domain model.
+- Preserve bounded contexts as the product grows: writing analysis, guided rewrite, reporting, teacher review, booking/conversion, and content/research should not leak concerns into each other.
+- Do not over-abstract for DDD ceremony. Introduce entities, value objects, repositories, or services only when they simplify real behavior or protect domain rules.
+- Prefer a modular monolith before services. Keep one deployable app while organizing code by product/domain modules with explicit boundaries.
+- Each module should follow clean/onion/hexagonal architecture in spirit: domain core at the center, application/use-case orchestration around it, adapters at the outside.
+- Dependencies should point inward. Domain code must not import HTTP handlers, browser UI, databases, AI SDKs, provider clients, or framework-specific code.
+- Cross-module communication should happen through small application interfaces or explicit events/data contracts, not by reaching into another module's internals.
+- External systems such as OpenAI, Groq, Claude, storage, email, auth, and booking should be adapters behind ports/interfaces owned by the relevant module.
+- Keep module boundaries pragmatic for the current plain Node MVP. A clear file/folder boundary is enough until behavior justifies stronger enforcement.
+- Consider at least two designs for non-trivial architecture choices, then choose based on interface simplicity, testability, product fit, and change cost.
+- Prefer strategic cleanup when touching fragile code, but do not expand scope into unrelated refactors.
+- Use tests or focused verification as the safety net for design changes.
